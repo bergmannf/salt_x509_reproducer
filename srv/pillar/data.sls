@@ -2,7 +2,7 @@ x509_signing_policies:
   minion:
     - authorityKeyIdentifier: "keyid"
     - basicConstraints: "critical CA:false"
-    - copypath: "/etc/pki/issued_certs/"
+    - copypath: "/etc/pki/"
     - keyUsage: "critical nonRepudiation, digitalSignature, keyEncipherment"
     - minions: "*"
     - signing_cert: /etc/pki/cert.crt
