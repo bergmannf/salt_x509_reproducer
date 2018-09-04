@@ -5,6 +5,39 @@
     - dir_mode: 755
     - file_mode: 644
 
+'/etc/pki/private':
+  file.directory:
+    - user: root
+    - group: root
+    - dir_mode: 755
+    - file_mode: 644
+
+'/etc/pki/private/ca.key':
+  x509.private_key_managed:
+    - bits: 4096
+    - user: root
+    - group: root
+    - mode: 444
+
+'/etc/pki/cert.crt':
+  x509.certificate_managed:
+    - signing_private_key: /etc/pki/private/ca.key
+    - CN: '$CA_SERVER'
+    - C: DE
+    - ST: Bavaria
+    - L: Nuremberg
+    - basicConstraints: "critical CA:true"
+    - keyUsage: "critical cRLSign, keyCertSign"
+    - subjectKeyIdentifier: hash
+    - authorityKeyIdentifier: keyid,issuer:always
+    - days_valid: 3650
+    - days_remaining: 0
+    - backup: True
+    - bits: 4096
+    - user: root
+    - group: root
+    - mode: 444
+
 '/etc/pki/minion.key':
   x509.private_key_managed:
     - bits: 4096
